@@ -120,11 +120,19 @@
     <Compile Include="Data\IRepository.cs" />
     <Compile Include="Data\PagedResult`1.cs" />
     <Compile Include="Data\Queries\GetBeersQuery.cs" />
-    <Compile Include="DbUpDatabaseInitializer.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="LinkTemplates.cs" />
+    <Compile Include="Migrations\201507282157024_Initial.cs" />
+    <Compile Include="Migrations\201507282157024_Initial.Designer.cs">
+      <DependentUpon>201507282157024_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201507282221591_Nav.cs" />
+    <Compile Include="Migrations\201507282221591_Nav.Designer.cs">
+      <DependentUpon>201507282221591_Nav.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Beer.cs" />
     <Compile Include="Models\BeerStyle.cs" />
     <Compile Include="Models\Brewery.cs" />
@@ -137,9 +145,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Data\Scripts\Script001.sql" />
-    <EmbeddedResource Include="Data\Scripts\Script002_InitialData.sql" />
-    <EmbeddedResource Include="Data\Scripts\Script003.sql" />
+    <Content Include="App_Data\BeerDbContext.mdf" />
+    <Content Include="App_Data\BeerDbContext_log.ldf">
+      <DependentUpon>BeerDbContext.mdf</DependentUpon>
+    </Content>
     <Content Include="Global.asax" />
     <Content Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -154,6 +163,12 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
+    <EmbeddedResource Include="Migrations\201507282157024_Initial.resx">
+      <DependentUpon>201507282157024_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201507282221591_Nav.resx">
+      <DependentUpon>201507282221591_Nav.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

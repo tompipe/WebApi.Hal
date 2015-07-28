@@ -2,7 +2,7 @@
 {
     public class Beer
     {
-        protected Beer()
+        internal Beer()
         {
         }
 
@@ -13,7 +13,8 @@
 
         public int Id { get; protected set; }
         public string Name { get; set; }
-        public BeerStyle Style { get; set; }
-        public Brewery Brewery { get; set; }
+        public double Abv { get; set; }
+        public virtual BeerStyle Style { get; set; }
+        public virtual Brewery Brewery { get; set; }
     }
 }

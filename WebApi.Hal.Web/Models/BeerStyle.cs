@@ -2,7 +2,7 @@ namespace WebApi.Hal.Web.Models
 {
     public class BeerStyle
     {
-        protected BeerStyle()
+        internal BeerStyle()
         {
         }
 

@@ -7,18 +7,16 @@ using Autofac.Integration.WebApi;
 using Newtonsoft.Json;
 using WebApi.Hal.Web.App_Start;
 using WebApi.Hal.Web.Data;
+using WebApi.Hal.Web.Migrations;
 
 namespace WebApi.Hal.Web
 {
     public class WebApiApplication : System.Web.HttpApplication
     {
         IContainer container;
-        string connectionString;
 
         protected void Application_Start()
         {
-            connectionString = ConfigurationManager.AppSettings["BeerDatabase"];
-
             RouteConfig.RegisterRoutes(GlobalConfiguration.Configuration.Routes);
 
             GlobalConfiguration.Configuration.Formatters.Add(new JsonHalMediaTypeFormatter());
@@ -28,7 +26,7 @@ namespace WebApi.Hal.Web
 
             ConfigureContainer(containerBuilder);
 
-            Database.SetInitializer(new DbUpDatabaseInitializer(connectionString));
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<BeerDbContext, BeerDbContextConfiguration>());
 
             container = containerBuilder.Build();
             GlobalConfiguration.Configuration.DependencyResolver = new AutofacWebApiDependencyResolver(container);
@@ -41,7 +39,7 @@ namespace WebApi.Hal.Web
             containerBuilder.RegisterApiControllers(Assembly.GetExecutingAssembly());
 
             containerBuilder
-                .Register(c=> new BeerDbContext(connectionString))
+                .Register(c=> new BeerDbContext())
                 .As<IBeerDbContext>()
                 .InstancePerApiRequest();
 
